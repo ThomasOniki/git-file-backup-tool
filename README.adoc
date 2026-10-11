@@ -37,3 +37,7 @@ sh uninstall.sh
 ----
 
 PREFIX should be set to the value you used when installing.
+
+== Troubleshooting
+
+On macos, the launch agent logs can be found in $XDG_STATE_HOME/git-file-backup-tool.log.
