@@ -1,0 +1,35 @@
+= git-file-backup-tool
+
+git-file-backup-tool is a tool written in bash that periodically checks to see if any registered repositories have been modified, and automatically creates commits using the date and time as the commit message that are then pushed to the origin remote.
+
+== Installation
+
+Run
+[source,sh]
+----
+curl https://codeberg.org/ThomasOniki/git-file-backup-tool/raw/branch/main/install.sh | sh
+----
+
+or if have cloned the repo,
+[source,sh]
+----
+bash install-cloned.bash
+----
+
+== Configuration
+
+The default configuration should be in $XDG_CONFIG_HOME/git-file-backup-tool/config.bash after the first installation.
+
+== Uninstallation
+
+Run
+[source]
+----
+curl https://codeberg.org/ThomasOniki/git-file-backup-tool/raw/branch/main/uninstall.sh | sh
+----
+
+or if have cloned the repo,
+[source,sh]
+----
+sh uninstall.sh
+----

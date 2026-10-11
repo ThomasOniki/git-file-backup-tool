@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+cfg="${XDG_CONFIG_HOME-$HOME/.config}/git-file-backup-tool/config.bash"
+[ -e "$cfg" ] && source "$cfg"
+
+save() {
+	local repo="${1%/}"
+	echo "Creating commit in repo '${repo##*/}'..."
+	pushd "$repo" >/dev/null || exit
+	git add .
+	git commit -m "$(date +"$GIT_FILE_BACKUP_TOOL_COMMIT_MSG_FORMAT")"
+	git push origin main
+	popd >/dev/null || exit
+}
+save_all() {
+	for repo in "${GIT_FILE_BACKUP_TOOL_REPOS[@]}"; do
+		save "$repo"
+	done
+}
+daemon() {
+	local mtimes=()
+	GIT_FILE_BACKUP_TOOL_CHECK_FREQUENCY="${GIT_FILE_BACKUP_TOOL_CHECK_FREQUENCY-20m}"
+	while sleep "$GIT_FILE_BACKUP_TOOL_CHECK_FREQUENCY"; do
+		for key in "${!GIT_FILE_BACKUP_TOOL_REPOS[@]}"; do
+			local repo="${GIT_FILE_BACKUP_TOOL_REPOS["$key"]}"
+			local mtime
+			mtime="$(date -r "$repo" "+%s")"
+			if [ "${mtimes["$key"]}" != "$mtime" ]; then
+				mtimes["$key"]="$mtime"
+				save "$repo"
+			fi
+		done
+	done
+}
+
+pusage() {
+	echo "usage:
+  git-file-backup-tool --save
+  git-file-backup-tool --daemon"
+	exit 1
+}
+
+if [ "$#" != 1 ]; then
+	pusage
+fi
+
+if [ "$1" = "--save" ]; then
+	save_all
+elif [ "$1" = "--daemon" ]; then
+	daemon
+else
+	pusage
+fi
