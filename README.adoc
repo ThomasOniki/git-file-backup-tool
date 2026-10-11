@@ -7,7 +7,7 @@ git-file-backup-tool is a tool written in bash that periodically checks to see i
 Run
 [source,sh]
 ----
-PREFIX="$HOME/.local" curl https://codeberg.org/ThomasOniki/git-file-backup-tool/raw/branch/main/install.sh | sh
+curl https://codeberg.org/ThomasOniki/git-file-backup-tool/raw/branch/main/install.sh | PREFIX="$HOME/.local" sh
 ----
 
 or if have cloned the repo,
@@ -27,7 +27,7 @@ The default configuration should be in $XDG_CONFIG_HOME/git-file-backup-tool/con
 Run
 [source]
 ----
-PREFIX="$HOME/.local" curl https://codeberg.org/ThomasOniki/git-file-backup-tool/raw/branch/main/uninstall.sh | sh
+curl https://codeberg.org/ThomasOniki/git-file-backup-tool/raw/branch/main/uninstall.sh | PREFIX="$HOME/.local" sh
 ----
 
 or if have cloned the repo,
