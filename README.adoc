@@ -10,7 +10,7 @@ Run
 curl https://codeberg.org/ThomasOniki/git-file-backup-tool/raw/branch/main/install.sh | PREFIX="$HOME/.local" sh
 ----
 
-or if have cloned the repo,
+or if you have cloned the repo,
 [source,sh]
 ----
 bash install-cloned.bash
@@ -30,7 +30,7 @@ Run
 curl https://codeberg.org/ThomasOniki/git-file-backup-tool/raw/branch/main/uninstall.sh | PREFIX="$HOME/.local" sh
 ----
 
-or if have cloned the repo,
+or if you have cloned the repo,
 [source,sh]
 ----
 sh uninstall.sh
